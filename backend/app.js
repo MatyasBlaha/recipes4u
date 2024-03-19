@@ -10,8 +10,8 @@ const cors = require('cors')
 app.use(cors());
 
 
-const User = require('./database/userModel');
-const UserOTPVerification = require('./database/UserOTPVerification');
+const User = require('./Schema/userModel');
+const UserOTPVerification = require('./Schema/UserOTPVerification');
 const auth = require('./roots/auth');
 const dbConnect = require('./database/dbConnect');
 
@@ -64,6 +64,7 @@ app.post("/api/register", (req, res) => {
             user
                 .save()
                 .then((result) => {
+                    const userId = result._id;
                     sendOTPVerificationEmail(result, res)
                 })
                 //catch error if user wasn't added to the database
@@ -100,6 +101,12 @@ app.post("/api/login", (req, res) => {
                     if(!passwordChecked) {
                         return res.status(400).send({
                             message: "password do not match",
+                        })
+                    }
+
+                    if(!user.verified) {
+                        return res.status(400).send({
+                            message: "Please verify your account"
                         })
                     }
 
