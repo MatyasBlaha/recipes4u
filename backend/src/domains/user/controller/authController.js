@@ -31,7 +31,7 @@ exports.registerUser = async (req, res) => {
         bcrypt
             .hash(req.body.password, 10)
             .then((hashedPassword) => {
-                //create a new user instance and collect the data
+
                 const user = new User({
                     name: req.body.name,
                     email: req.body.email,
@@ -39,14 +39,13 @@ exports.registerUser = async (req, res) => {
                     verified: false
                 })
 
-                //Save the new user to the database
                 user
                     .save()
                     .then((result) => {
                         const userId = result._id;
                         sendOTPVerificationEmail(result, res, userId)
                     })
-                    //catch error if user wasn't added to the database
+
                     .catch((err) => {
                         res.status(500).send({
                             message: "Error creating user",
@@ -54,7 +53,7 @@ exports.registerUser = async (req, res) => {
                         })
                     })
             })
-            //catch error if the password wasn't hashed
+
             .catch((err) => {
                 res.status(500).send({
                     message: "Password could not be hashed",
@@ -165,7 +164,7 @@ exports.verifyOTP = async (req, res) => {
             });
         } else {
 
-            throw new Error("Invalid dsffdsdsfds passed. Check your inbox");
+            throw new Error("Invalid address passed. Check your inbox");
         }
     } catch (err) {
         console.error(err);
@@ -189,7 +188,7 @@ exports.resendOTPVerify = async (req, res) => {
             message: 'OTP resent to your email.'
         });
     } catch (err) {
-        new Error("Invalid dsffdsdsfds passed")
+        new Error("Invalid url passed")
     }
 };
 
@@ -216,7 +215,7 @@ exports.forgotPassword = async (req, res) => {
             }
 
     } catch (err) {
-        new Error("Invalid dsffdsdsfds passed")
+        new Error("Invalid url passed")
 
     }
 };
@@ -260,9 +259,9 @@ exports.resetPassword = async (req, res) => {
 
         // await passwordResetRecord.delete();
 
-        return res.json({message: 'heslo bylo zmeneno'});
+        return res.json({message: 'password was changed'});
     } catch (err){
-        return res.status(500).json({message: 'chyba pri resetovani hesla'})
+        return res.status(500).json({message: 'error while reset password'})
     }
 
 };
@@ -278,7 +277,7 @@ exports.userInfo = async (req, res) => {
         const user = await User.findById(userId);
 
         if (!user) {
-            return res.status(404).json({ message: 'Uživatel nenalezen' });
+            return res.status(404).json({ message: 'user not found' });
         }
 
 
@@ -288,7 +287,7 @@ exports.userInfo = async (req, res) => {
         });
 
     } catch (error) {
-        console.error('Chyba při získávání informací o uživateli:', error);
-        res.status(500).json({ message: 'Chyba při získávání informací o uživateli' });
+        console.error('error while getting info about user:', error);
+        res.status(500).json({ message: 'error while getting info about user' });
     }
 };

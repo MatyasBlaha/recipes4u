@@ -3,19 +3,19 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Pole nesmí být prázdný'],
-        unique: [true, 'Jméno již je zaregistrováno']
+        required: [true, "input can't be empty"],
+        unique: [true, 'name is already exist']
     },
 
     email: {
         type: String,
-        required: [true, 'Pole nesmí být prázdný'],
-        unique: [true, 'Email již je zaregistrován']
+        required: [true, 'input can\'t be empty'],
+        unique: [true, 'email is already exist']
     },
 
     password: {
         type: String,
-        required: [true, "Please provide a password!"],
+        required: [true, "Please provide a password"],
         unique: false,
     },
 

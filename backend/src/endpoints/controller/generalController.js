@@ -1,6 +1,6 @@
 exports.freeEndpoint = async (req, res) => {
     res.json({
-        message: "You are free to acccess"
+        message: "You are free to access"
     })
 }
 

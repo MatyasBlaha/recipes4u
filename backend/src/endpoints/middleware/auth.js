@@ -15,7 +15,6 @@ exports.auth = async (req, res, next) => {
 
         next();
     } catch (err) {
-        // Specifikujeme chybu podle běžného problému s tokenem
         return res.status(401).json({ message: "Invalid token, please login" });
     }
 };
@@ -25,7 +24,7 @@ exports.isAdmin = async (req, res, next) => {
 
     try{
         if(user.role === 0){
-            console.log("nelze overit admina")
+            console.log("can not auth admin")
         } else {
             next()
         }

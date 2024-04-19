@@ -50,7 +50,7 @@ exports.addRecipe = async (req, res) => {
 
         res.status(201).json(savedRecipe);
     } catch (err) {
-        res.status(500).json({ error: 'Chyba při ukládání receptu' });
+        res.status(500).json({ error: 'error while saving recipe' });
     }
 }
 
@@ -180,7 +180,7 @@ exports.deleteMyRecipe = async (req, res) => {
         const recipe = await RecipeModel.findById(req.body.recipeId);
         const user = await User.findById(req.body.userId);
         if (!recipe) {
-            return res.status(404).json({ message: "Recept nebyl nalezen." });
+            return res.status(404).json({ message: "recipe not found" });
         }
 
         if (recipe.userOwner.toString() !== user._id.toString()) {
@@ -197,7 +197,7 @@ exports.deleteMyRecipe = async (req, res) => {
         await RecipeModel.deleteOne(recipe);
 
 
-        res.json({ message: "Recept byl úspěšně smazán." });
+        res.json({ message: "recipe was successfully deleted." });
     } catch (err){
         res.json(err);
     }
@@ -207,7 +207,7 @@ exports.deleteMyRecipeAdmin = async (req, res) => {
     try {
         const recipe = await RecipeModel.findById({_id: req.body.recipeId})
         if (!recipe) {
-            return res.status(404).json({ message: "Recept nebyl nalezen." });
+            return res.status(404).json({ message: "recipe wasn't found" });
         }
 
         if (recipe.files && recipe.files.length) {
@@ -217,7 +217,7 @@ exports.deleteMyRecipeAdmin = async (req, res) => {
         }
 
         await RecipeModel.deleteOne(recipe)
-        res.json({ message: "Recept byl úspěšně smazán." });
+        res.json({ message: "recipe was successfully deleted" });
     } catch (err) {
         res.json(err);
     }
