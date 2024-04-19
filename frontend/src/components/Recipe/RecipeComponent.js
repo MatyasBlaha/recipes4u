@@ -1,10 +1,8 @@
 import { React, useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import iconHeart from "../../assets/icon_heart.png";
-import iconHeartDisabled from "../../assets/icon_heart_disabled.png";
-import iconClock from "../../assets/icon_clock.png";
-
-import {styled} from "styled-components";
+import iconHeart from "../../assets/icons/icon_heart.png";
+import iconHeartDisabled from "../../assets/icons/icon_heart_disabled.png";
+import iconClock from "../../assets/icons/icon_clock.png";
 
 import {
     ContentCenter,
@@ -13,8 +11,7 @@ import {
     DivFlexSpaceBetween,
     RecipeImage,
     DarkButtonSmall,
-}
-    from '../../assets/styles/global';
+} from '../../assets/styles/global';
 
 import {
     RecipeContainer,
@@ -30,8 +27,10 @@ import {
     LeftColumn,
     RightColumn,
     IngredientItem, DivFlexRecipeImgAndIngredients, DivFlexRecipeDetailImgs, InstructionContainer
-} from './RecipeComponent.style'
+} from './style/RecipeComponent.style'
 
+
+import RecipeImages from "./components/RecipeImages/RecipeImages";
 
 
 
@@ -41,25 +40,6 @@ const RecipeComponent = ({ recipe, displayMode, showDetailsLink, recipeButtons, 
     const navigate = useNavigate();
 
 
-
-
-    const renderImages = () => {
-        if (displayMode === 'single' && recipe.files.length) {
-            return <RecipeImageBig style={{width: "180px", height:"180px"}} src={require(`../../data/images/${recipe.files[0]}`)} alt={recipe.name} />;
-        }
-        else if (displayMode === 'all') {
-            return (
-                <DivFlexRecipeDetailImgs>
-                    <RecipeImageBig src={require(`../../data/images/${recipe.files[0]}`)} alt={`${recipe.name} 1`} />
-                    <RecipeImageSmallContainer>
-                        {recipe.files.slice(1).map((file, index) => (
-                            <RecipeImageSmall key={index + 1} src={require(`../../data/images/${file}`)} alt={`${recipe.name} ${index + 2}`} />
-                        ))}
-                    </RecipeImageSmallContainer>
-                </DivFlexRecipeDetailImgs>
-            );
-        }
-    };
 
 
 
@@ -170,71 +150,72 @@ const RecipeComponent = ({ recipe, displayMode, showDetailsLink, recipeButtons, 
         }
     };
 
+
     return (
 
-            <div>
-                {showDetailsLink ? (
-                    <RecipeWrapper>
-                        <RecipeContainer>
-                            <div>
-                                {editRecipe === 'editRecipe' &&
-                                    <Link to={`/Profile/editRecipe/${recipe._id}`}>Edit</Link>}
-                                {renderButtons()}
-                            </div>
-                                <div key={recipe._id} onClick={handleDivClick} style={{cursor: showDetailsLink ? 'pointer' : 'default'}}>
-                                        <RecipeContentContainer>
-                                            <div style={{maxWidth: "75%"}}>
-                                                <h2>{recipe.name}</h2>
-                                                <DivFlex style={{alignItems: "center"}}>
-                                                    <DivFlex style={{alignItems: "center", marginRight: "20px"}}>
-                                                        <IconButton style={{margin: "0"}}>
-                                                            <Img src={iconClock} alt="Cooking Time"></Img>
-                                                        </IconButton>
-                                                        <p>{recipe.CookingTime} mintues</p>
-                                                    </DivFlex>
-                                                    <p>Difficulty: {recipe.difficulty}</p>
-                                                </DivFlex>
-                                                <p style={{marginBottom:"10px"}}>{truncateText(recipe.instructions)}</p>
-                                            </div>
-                                            <div>
-                                                <div>{renderImages()}</div>
-                                            </div>
-                                        </RecipeContentContainer>
-                                </div>
-                        </RecipeContainer>
-                    </RecipeWrapper>
-                ) : (
-                    <RecipeWrapper>
-                        <div style={{paddingTop: "150px", marginBottom: "70px"}}>
-                            <RecipeDetailWrapper>
-                                <div>
-                                    <DarkButtonSmall onClick={handleReturn}>Back to home</DarkButtonSmall>
-                                    <div style={{paddingTop: "30px"}}>
-                                        <h2>{recipe.name}</h2>
-                                        <DivFlex style={{alignItems: "center"}}>
-                                            <DivFlex style={{alignItems: "center", marginRight: "20px"}}>
-                                                <IconButton style={{margin: "0"}}>
-                                                    <Img src={iconClock} alt="Cooking Time"></Img>
-                                                </IconButton>
-                                                <p>{recipe.CookingTime} mintues</p>
-                                            </DivFlex>
-                                            <p>Difficulty: {recipe.difficulty}</p>
-                                        </DivFlex>
-                                        <DivFlexRecipeImgAndIngredients>
-                                            {renderImages()}
-                                            {renderIngredients()}
-                                        </DivFlexRecipeImgAndIngredients>
-                                        <InstructionContainer>
-                                            <h3>Instructions</h3>
-                                            <p>{recipe.instructions}</p>
-                                        </InstructionContainer>
-                                    </div>
-                                </div>
-                            </RecipeDetailWrapper>
+        <div>
+            {showDetailsLink ? (
+                <RecipeWrapper>
+                    <RecipeContainer>
+                        <div>
+                            {editRecipe === 'editRecipe' &&
+                                <Link to={`/Profile/editRecipe/${recipe._id}`}>Edit</Link>}
+                            {renderButtons()}
                         </div>
-                    </RecipeWrapper>
-                )}
-            </div>
+                        <div key={recipe._id} onClick={handleDivClick} style={{cursor: showDetailsLink ? 'pointer' : 'default'}}>
+                            <RecipeContentContainer>
+                                <div style={{maxWidth: "75%"}}>
+                                    <h2>{recipe.name}</h2>
+                                    <DivFlex style={{alignItems: "center"}}>
+                                        <DivFlex style={{alignItems: "center", marginRight: "20px"}}>
+                                            <IconButton style={{margin: "0"}}>
+                                                <Img src={iconClock} alt="Cooking Time"></Img>
+                                            </IconButton>
+                                            <p>{recipe.CookingTime} minutes</p>
+                                        </DivFlex>
+                                        <p>Difficulty: {recipe.difficulty}</p>
+                                    </DivFlex>
+                                    <p style={{marginBottom:"10px"}}>{truncateText(recipe.instructions)}</p>
+                                </div>
+                                <div>
+                                    <RecipeImages recipe={recipe} displayMode={displayMode} />
+                                </div>
+                            </RecipeContentContainer>
+                        </div>
+                    </RecipeContainer>
+                </RecipeWrapper>
+            ) : (
+                <RecipeWrapper>
+                    <div style={{paddingTop: "150px", marginBottom: "70px"}}>
+                        <RecipeDetailWrapper>
+                            <div>
+                                <DarkButtonSmall onClick={handleReturn}>Back to home</DarkButtonSmall>
+                                <div style={{paddingTop: "30px"}}>
+                                    <h2>{recipe.name}</h2>
+                                    <DivFlex style={{alignItems: "center"}}>
+                                        <DivFlex style={{alignItems: "center", marginRight: "20px"}}>
+                                            <IconButton style={{margin: "0"}}>
+                                                <Img src={iconClock} alt="Cooking Time"></Img>
+                                            </IconButton>
+                                            <p>{recipe.CookingTime} minutes</p>
+                                        </DivFlex>
+                                        <p>Difficulty: {recipe.difficulty}</p>
+                                    </DivFlex>
+                                    <DivFlexRecipeImgAndIngredients>
+                                        <RecipeImages recipe={recipe} displayMode={displayMode} />
+                                        {renderIngredients()}
+                                    </DivFlexRecipeImgAndIngredients>
+                                    <InstructionContainer>
+                                        <h3>Instructions</h3>
+                                        <p>{recipe.instructions}</p>
+                                    </InstructionContainer>
+                                </div>
+                            </div>
+                        </RecipeDetailWrapper>
+                    </div>
+                </RecipeWrapper>
+            )}
+        </div>
     );
 };
 

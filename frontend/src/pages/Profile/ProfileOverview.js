@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from 'react';
-import iconEdit from '../../assets/icon_edit.png'
+import iconEdit from '../../assets/icons/icon_edit.png'
 
 import {styled} from "styled-components";
 import {LinkButton, DivFlexColumn} from "../../assets/styles/global"
