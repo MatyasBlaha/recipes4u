@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { freeEndpoint, authEndpoint } = require('../controller/generalController');
-const { verifyOTP, resendOTPVerify } = require('../../domains/user/controller/authController')
+const {verifyOTP} = require('../../domains/user/controllers/POST/verifyOTP/verifyOTP')
+const {resendOTPVerify} = require('../../domains/user/controllers/POST/resendOTPVefify/resendOTPVerify')
 const {auth} = require('../middleware/auth');
 const corsMiddleware = require('../middleware/cors');
 
