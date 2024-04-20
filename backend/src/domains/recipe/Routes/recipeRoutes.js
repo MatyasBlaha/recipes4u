@@ -1,22 +1,25 @@
 const express = require('express')
 const router = express.Router();
-const { loadRecipes, editRecipe, recipeDetails, addRecipe, saveRecipe, savedRecipesIds, savedRecipes, removeSavedRecipe, myRecipes, deleteMyRecipe, deleteMyRecipeAdmin, searchRecipes} = require('../controllers/recipeController')
 const { auth, isAdmin } = require('../../../endpoints/middleware/auth');
 
+// GET
+const {loadRecipes} = require('../controllers/GET/loadRecipes/loadRecipes')
+const {myRecipes} = require('../controllers/GET/myRecipes/myRecipes')
+const {recipeDetails} = require('../controllers/GET/recipeDetails/recipeDetails')
+const {savedRecipes} = require('../controllers/GET/savedRecipes/savedRecipes')
+const {savedRecipesIds} = require('../controllers/GET/savedRecipesIds/savedRecipesIds')
+const {searchRecipes} = require('../controllers/GET/searchRecipes/searchRecipes')
 
-const multer = require('multer');
-const path = require('path');
+// POST
+const {addRecipe} = require('../controllers/POST/addRecipe/addRecipe')
+const {deleteMyRecipe} = require('../controllers/POST/deleteMyRecipe/deleteMyRecipe')
+const {deleteMyRecipeAdmin} = require('../controllers/POST/deleteMyRecipeAdmin/deleteMyRecipeAdmin')
+const {editRecipe} = require('../controllers/POST/editRecipe/editRecipe')
+const {removeSavedRecipe} = require('../controllers/POST/removeSavedRecipe/removeSavedRecipe')
+const {saveRecipe} = require('../controllers/POST/saveRecipe/saveRecipe')
 
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, path.join(__dirname, '../../../../../frontend/src/data/images'));
-    },
-    filename: function(req, file, cb) {
-        console.log(file)
-        cb(null, file.originalname);
-    }
-});
-const uploads = multer({ storage: storage });
+//UTILS
+const {uploads} = require('../utils/storage')
 
 
 
