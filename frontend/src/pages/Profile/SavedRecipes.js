@@ -35,30 +35,6 @@ const SavedRecipes = () => {
         fetchSavedRecipe()
     }, [])
 
-    const removeSavedRecipe = async (recipeId) => {
-        try {
-
-            const data = {
-                userId, recipeId
-            }
-
-            const configuration = {
-                method: "post",
-                url: `http://localhost:8080/api/removeSavedRecipe`,
-                data
-            }
-
-            axios(configuration)
-                .then((result) => {
-                    setSavedRecipes(savedRecipes.filter(recipe => recipe._id !== recipeId));
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
-        } catch (e) {
-
-        }
-    }
 
 
 
@@ -72,8 +48,7 @@ const SavedRecipes = () => {
                         recipe={recipe}
 
                         //Prompt buttons
-                        recipeButtons='savedRecipes'
-                        removeSavedRecipe={removeSavedRecipe}
+
 
                         message={message}
                         displayMode="single"

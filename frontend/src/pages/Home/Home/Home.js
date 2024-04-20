@@ -124,9 +124,34 @@ const Home = () => {
         }
     }
 
+    const removeSavedRecipe = async (recipeId) => {
 
+        try {
 
-        const isRecipeSaved = (id) => savedRecipes?.includes(id)
+            const data = {
+                userId, recipeId
+            }
+
+            const configuration = {
+                method: "post",
+                url: `http://localhost:8080/api/removeSavedRecipe`,
+                data
+            }
+
+            axios(configuration)
+                .then((result) => {
+                    setSavedRecipes(result.data.savedRecipes)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+        } catch (e) {
+
+        }
+    }
+
+    const isRecipeSaved = (id) => savedRecipes?.includes(id)
+
 
 
     const handleSearch = async (e) => {
@@ -152,6 +177,7 @@ const Home = () => {
             deleteRecipe(recipeId);
         }
     };
+
 
     const deleteRecipe = async (recipeId) => {
 
@@ -251,6 +277,7 @@ const Home = () => {
 
                                     recipeButtons="main"
                                     saveRecipe={saveRecipe}
+                                    removeSavedRecipe={removeSavedRecipe}
                                     deleteRecipe={() => confirmDeleteRecipe(recipe._id)}
                                     isRecipeSaved={isRecipeSaved(recipe._id)}
 
