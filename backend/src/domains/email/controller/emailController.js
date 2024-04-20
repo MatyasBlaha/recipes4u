@@ -1,16 +1,11 @@
 const bcrypt = require('bcryptjs');
-const nodemailer = require('nodemailer');
 const UserOTPVerification = require('../../user/model/UserOTPVerificationModel')
 const UserPasswordReset = require('../../user/model/UserPasswordResetModel')
+
+const {transporter} = require('../utils/transporter')
 require('dotenv').config();
 
-let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    auth: {
-        user: process.env.AUTH_USER,
-        pass: process.env.AUTH_PASSWORD
-    }
-})
+
 
 exports.sendOTPVerificationEmail = async ({ _id, email }, res) => {
     try {
@@ -54,7 +49,6 @@ exports.sendOTPVerificationEmail = async ({ _id, email }, res) => {
         })
     }
 };
-
 
 exports.sendPasswordResetEmail = async ({ _id, email}, res) => {
     try {

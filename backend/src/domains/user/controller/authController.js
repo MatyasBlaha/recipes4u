@@ -91,7 +91,7 @@ exports.loginUser = async (req, res) => {
                                 userId: user._id
                             },
                             process.env.JWT_SECRET_KEY,
-                            {expiresIn: "1h"}
+                            {expiresIn: "24h"}
                         );
 
                         const role = jwt.sign(
@@ -99,7 +99,7 @@ exports.loginUser = async (req, res) => {
                                 userRole: user.role
                         },
                             process.env.JWT_SECRET_KEY,
-                            {expiresIn: "1h"}
+                            {expiresIn: "24h"}
                         )
 
                         res.status(200).send({
