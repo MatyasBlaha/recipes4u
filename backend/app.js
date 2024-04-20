@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const authRoutes = require('./src/domains/user/route/authRoutes')
 const generalRoutes = require('./src/endpoints/route/generalRoutes')
-const recipeRoutes = require('./src/domains/recipe/route/recipeRoutes')
+const recipeRoutes = require('./src/domains/recipe/Routes/recipeRoutes')
 
 const dbConnect = require('./database/dbConnect');
 dbConnect();

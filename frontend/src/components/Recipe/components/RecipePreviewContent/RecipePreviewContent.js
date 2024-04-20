@@ -51,7 +51,7 @@ const navigate = useNavigate()
                     {editRecipe === 'editRecipe' &&
                         <Link to={`/Profile/editRecipe/${recipe._id}`}>Edit</Link>
                     }
-                    <RecipeButtons recipeButton={recipeButtons} deleteRecipe={deleteRecipe} userRole={userRole} recipeId={recipe._id} saveRecipe={saveRecipe} removeSavedRecipe={removeSavedRecipe} isRecipeSaved={isRecipeSaved} />
+                    <RecipeButtons recipeButtons={recipeButtons} deleteRecipe={deleteRecipe} userRole={userRole} recipeId={recipe._id} saveRecipe={saveRecipe} removeSavedRecipe={removeSavedRecipe} isRecipeSaved={isRecipeSaved} />
                 </div>
                 <div key={recipe._id} onClick={handleDivClick} style={{cursor: showDetailsLink ? 'pointer' : 'default'}}>
                     <RecipeContentContainer>

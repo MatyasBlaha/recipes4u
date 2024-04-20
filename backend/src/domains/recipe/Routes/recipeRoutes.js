@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const { loadRecipes, editRecipe, recipeDetails, addRecipe, saveRecipe, savedRecipesIds, savedRecipes, removeSavedRecipe, myRecipes, deleteMyRecipe, deleteMyRecipeAdmin, searchRecipes} = require('../controller/recipeController')
+const { loadRecipes, editRecipe, recipeDetails, addRecipe, saveRecipe, savedRecipesIds, savedRecipes, removeSavedRecipe, myRecipes, deleteMyRecipe, deleteMyRecipeAdmin, searchRecipes} = require('../controllers/recipeController')
 const { auth, isAdmin } = require('../../../endpoints/middleware/auth');
 
 
