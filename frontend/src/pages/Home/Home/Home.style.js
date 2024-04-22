@@ -1,5 +1,6 @@
 import {styled} from "styled-components";
 import introBackground from "../../../assets/intro_Background.jpg";
+import {Input, Select} from "../../../assets/styles/global"
 
 export const IntroWrapper = styled.div`
     background-image: url(${introBackground});
@@ -30,4 +31,27 @@ export const HomeForm = styled.form`
     }
 `
 
+export const HomeInput = styled(Input)`
+    background: ${({ theme }) => theme.componentBackgroundSecond};
+    color: ${({ theme }) => theme.text};
+    margin: 15px 0;
+`
 
+export const HomeSelect = styled(Select)`
+    background: ${({ theme }) => theme.componentBackgroundSecond};
+    color: ${({ theme }) => theme.text};
+    margin: 15px 0;
+`
+
+export const SearchHeader = styled.h3`
+    color: ${({ theme }) => theme.secondText};
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-style: italic;
+    font-weight: 200;
+`
+
+export const Header1 = styled.h1`
+    font-style: normal;
+    font-weight: 400;
+`

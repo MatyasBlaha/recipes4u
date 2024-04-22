@@ -10,5 +10,5 @@ app.set('port', port);
 const server = http.createServer(app);
 
 server.listen(port, () => {
-    console.log(`Server běží na portu ${port}`);
+    console.log(`server is running on port: ${port}`);
 });

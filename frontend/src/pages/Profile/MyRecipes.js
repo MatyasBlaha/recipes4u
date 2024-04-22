@@ -6,6 +6,8 @@ import {userGetUserID} from "../../hooks/useGetUserID";
 import {RecipeImage} from "../../assets/styles/global"
 import RecipeComponent from "../../components/Recipe/RecipeComponent";
 
+import deleteRecipe from '../../components/Recipe/components/RecipeButtons/RecipeButtons';
+
 const MyRecipes = () => {
     const userId = userGetUserID();
 
@@ -35,40 +37,6 @@ const MyRecipes = () => {
     }, [])
 
 
-    const confirmDeleteRecipe = (recipeId) => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this recipe?");
-        if (confirmDelete) {
-            deleteRecipe(recipeId);
-        }
-    };
-    const deleteRecipe = async (recipeId) => {
-        try {
-
-            const data = {
-                userId, recipeId
-            }
-
-            const configuration = {
-                method: "post",
-                url: `http://localhost:8080/api/deleteMyRecipe`,
-                data
-            }
-
-            axios(configuration)
-                .then((result) => {
-                    setSavedRecipes(savedRecipes.filter(recipe => recipe._id !== recipeId));
-                    console.log(data)
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
-        } catch (e) {
-
-        }
-    }
-
-
-
     return (
         <div>
             <h1>My recipes</h1>
@@ -80,7 +48,7 @@ const MyRecipes = () => {
 
                         //Prompt buttons
                         recipeButtons='myRecipes'
-                        deleteRecipe={() => confirmDeleteRecipe(recipe._id)}
+                        deleteRecipe={() => deleteRecipe(recipe._id)}
                         editRecipe='editRecipe'
 
                         message={message}

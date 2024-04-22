@@ -1,5 +1,4 @@
 import { React, useState, useEffect } from 'react';
-import {Link} from 'react-router-dom'
 import axios from "axios";
 import {userGetUserID} from "../../../hooks/useGetUserID";
 import {useGetUserRole} from "../../../hooks/useGetUserRole"
@@ -7,36 +6,13 @@ import {useGetUserRole} from "../../../hooks/useGetUserRole"
 import RecipeComponent from "../../../components/Recipe/RecipeComponent";
 
 import {styled} from "styled-components";
-import {ContentCenter, Input, Select, DivCenter, PrimaryButton} from "../../../assets/styles/global"
-import { HomeForm } from "./Home.style"
+import {ContentCenter, DivCenter, PrimaryButton} from "../../../assets/styles/global"
+import { HomeForm, HomeInput, HomeSelect, SearchHeader, Header1 } from "./Home.style"
 import Footer from "../../../components/Footer";
 import {IntroWrapper, Overlay} from "./Home.style";
 
 
-const HomeInput = styled(Input)`
-    background: ${({ theme }) => theme.componentBackgroundSecond};
-    color: ${({ theme }) => theme.text};
-    margin: 15px 0;
-`
-
-const HomeSelect = styled(Select)`
-    background: ${({ theme }) => theme.componentBackgroundSecond};
-    color: ${({ theme }) => theme.text};
-    margin: 15px 0;
-`
-
-const SearchHeader = styled.h3`
-    color: ${({ theme }) => theme.secondText};
-    font-size: 20px;
-    margin-bottom: 20px;
-    font-style: italic;
-    font-weight: 200;
-`
-
-const Header1 = styled.h1`
-    font-style: normal;
-    font-weight: 400;
-`
+import deleteRecipe from '../../../components/Recipe/components/RecipeButtons/RecipeButtons';
 
 
 
@@ -96,7 +72,6 @@ const Home = () => {
 
                 const data = {
                     recipeId,
-                    userId
                 }
 
                 const configuration = {
@@ -129,7 +104,7 @@ const Home = () => {
         try {
 
             const data = {
-                userId, recipeId
+                 recipeId
             }
 
             const configuration = {
@@ -171,42 +146,9 @@ const Home = () => {
              })
     }
 
-    const confirmDeleteRecipe = (recipeId) => {
-        const confirmDelete = window.confirm("Are you sure you want to delete this recipe?");
-        if (confirmDelete) {
-            deleteRecipe(recipeId);
-        }
-    };
 
 
-    const deleteRecipe = async (recipeId) => {
 
-
-        try {
-
-
-            const data = {
-                userId, recipeId
-            }
-
-            const configuration = {
-                method: "post",
-                url: `http://localhost:8080/api/deleteMyRecipeAdmin`,
-                data
-            }
-
-            axios(configuration)
-                .then((result) => {
-                    setSavedRecipes(savedRecipes.filter(recipe => recipe._id !== recipeId));
-                    setRecipes(recipes.filter(recipe => recipe._id !== recipeId));
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
-        } catch (e) {
-
-        }
-    }
     useEffect(() => {
         if (message) {
             alert(message);
@@ -269,7 +211,7 @@ const Home = () => {
                         <Header1 style={{margin: "60px 0 20px 0 "}}>Recipes for today</Header1>
                     </DivCenter>
                     <ul>
-                        <div>
+                       <div>
                             {recipes.map((recipe) => (
                                 <RecipeComponent
                                     key={recipe._id}
@@ -278,7 +220,7 @@ const Home = () => {
                                     recipeButtons="main"
                                     saveRecipe={saveRecipe}
                                     removeSavedRecipe={removeSavedRecipe}
-                                    deleteRecipe={() => confirmDeleteRecipe(recipe._id)}
+                                    deleteRecipe={() => deleteRecipe(recipe._id)}
                                     isRecipeSaved={isRecipeSaved(recipe._id)}
 
                                     userRole={userRole}

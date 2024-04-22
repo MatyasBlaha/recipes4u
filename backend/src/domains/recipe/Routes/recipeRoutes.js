@@ -12,8 +12,7 @@ const {searchRecipes} = require('../controllers/GET/searchRecipes/searchRecipes'
 
 // POST
 const {addRecipe} = require('../controllers/POST/addRecipe/addRecipe')
-const {deleteMyRecipe} = require('../controllers/POST/deleteMyRecipe/deleteMyRecipe')
-const {deleteMyRecipeAdmin} = require('../controllers/POST/deleteMyRecipeAdmin/deleteMyRecipeAdmin')
+const {deleteRecipe} = require('../controllers/POST/deleteMyRecipe/deleteRecipe')
 const {editRecipe} = require('../controllers/POST/editRecipe/editRecipe')
 const {removeSavedRecipe} = require('../controllers/POST/removeSavedRecipe/removeSavedRecipe')
 const {saveRecipe} = require('../controllers/POST/saveRecipe/saveRecipe')
@@ -25,8 +24,7 @@ const {uploads} = require('../utils/storage')
 
 router.post('/recipe',auth, uploads.array("files", 4), addRecipe);
 router.post('/removeSavedRecipe',auth, removeSavedRecipe);
-router.post('/deleteMyRecipe', auth, deleteMyRecipe);
-router.post('/deleteMyRecipeAdmin', auth, isAdmin, deleteMyRecipeAdmin);
+router.post('/deleteRecipe', auth, deleteRecipe);
 router.post('/editRecipe/:recipeId',auth, editRecipe);
 
 router.put('/recipe', auth, saveRecipe);

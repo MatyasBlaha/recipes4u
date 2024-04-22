@@ -47,9 +47,6 @@ const SavedRecipes = () => {
                         key={recipe._id}
                         recipe={recipe}
 
-                        //Prompt buttons
-
-
                         message={message}
                         displayMode="single"
                         showDetailsLink
