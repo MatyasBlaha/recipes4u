@@ -2,7 +2,8 @@ const RecipeModel = require("../../../model/RecipeModel");
 exports.addRecipe = async (req, res) => {
     try {
 
-        const { name, instructions, CookingTime, difficulty, userOwner } = req.body;
+        const { name, instructions, CookingTime, difficulty } = req.body;
+        const userOwner = req.user.userId
 
         const ingredients = req.body.ingredients.split(',');
         const files = req.files.map(file => file.originalname);

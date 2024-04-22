@@ -4,7 +4,7 @@ const RecipeModel = require("../../../model/RecipeModel");
 
 exports.myRecipes = async (req, res) => {
     try {
-        const userId = await User.findById(req.params.userId);
+        const userId = req.user.userId
         const myRecipes = await RecipeModel.find({ userOwner: userId})
 
         res.json({myRecipes})

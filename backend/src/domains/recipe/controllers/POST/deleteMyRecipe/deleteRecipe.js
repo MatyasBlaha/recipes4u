@@ -6,7 +6,8 @@ const User = require("../../../../user/model/UserModel");
 
 exports.deleteRecipe = async (req, res) => {
     try {
-        const { recipeId, userId } = req.body;
+        const { recipeId } = req.body;
+        const userId = req.user.userId
 
         // Find the recipe by its ID
         const recipe = await RecipeModel.findById(recipeId);
