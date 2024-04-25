@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
-import { colors } from "../../../styles/colors";
+import { colors } from "../../../../styles/colors";
 import { NavLink } from 'react-router-dom';
-import { LinkButton } from "../../../assets/styles/global";
+import { LinkButton } from "../../../../assets/styles/global";
 
 export const SidebarContainer = styled.div`
     position: fixed;

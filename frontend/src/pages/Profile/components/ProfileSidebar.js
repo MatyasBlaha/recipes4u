@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import { useLocation } from 'react-router-dom';
 import { LinkButton, DivFlexColumn } from "../../../assets/styles/global";
-import { SidebarContainer, ActiveLinkButton, Sidebar, ToggleButtonContainer, ToggleButton, Hamburger } from "./ProfileSidebar.style";
+import { SidebarContainer, ActiveLinkButton, Sidebar, ToggleButtonContainer, ToggleButton, Hamburger } from "./styles/ProfileSidebar.style";
 
 const ProfileSidebar = () => {
     const cookies = new Cookies();
