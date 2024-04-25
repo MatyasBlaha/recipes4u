@@ -5,7 +5,6 @@ import RecipePreviewContent from "./components/RecipePreviewContent/RecipePrevie
 
 
 const RecipeComponent = ({ recipe, displayMode, showDetailsLink, recipeButtons, saveRecipe, removeSavedRecipe, editRecipe, deleteRecipe, isRecipeSaved, userRole, }) => {
-
     return (
         <div>
             {showDetailsLink ? (

@@ -3,17 +3,12 @@ import { Img, IconButton } from '../../style/RecipeComponent.style';
 import iconHeart from '../../../../assets/icons/icon_heart.png';
 import iconHeartDisabled from '../../../../assets/icons/icon_heart_disabled.png';
 
-import axios from 'axios';
-import {userGetUserID} from "../../../../hooks/useGetUserID";
-import DeleteButton from './DeleteButton.js/DeleteRecipeButton';
 
 const RecipeButtons = ({ userRole, recipeButtons, isRecipeSaved, recipeId, saveRecipe, removeSavedRecipe, deleteRecipe, }) => {
 
-    const userId = userGetUserID();
-
-    const deleteButtonLabel = recipeButtons === 'main' ? 'Delete Recipe' : 'Delete';
 
     const renderSaveButton = () => (
+
         <IconButton
             onClick={() => {
                 isRecipeSaved ? removeSavedRecipe(recipeId) : saveRecipe(recipeId);
@@ -26,12 +21,11 @@ const RecipeButtons = ({ userRole, recipeButtons, isRecipeSaved, recipeId, saveR
 
 
     const renderDeleteButton = () => (
-        <DeleteButton
-            onClick={() => {}}
-            recipeId={recipeId}
-            userId={userId}
-            label={deleteButtonLabel}
-        />
+        <div>
+            <button onClick={deleteRecipe}>
+                delete Recipe
+            </button>
+        </div>
     );
 
 
@@ -51,17 +45,13 @@ const RecipeButtons = ({ userRole, recipeButtons, isRecipeSaved, recipeId, saveR
             return (
                 <div>
                     {renderSaveButton()}
-                    {userRole === 1 &&
-                        {renderDeleteButton}
-                    }
+                    {userRole === 1 && renderDeleteButton()}
                 </div>
             );
         case 'savedRecipes':
             return renderRemoveSavedButton();
         case 'myRecipes':
-            return (
-                {renderDeleteButton}
-            );
+            return renderDeleteButton()
         default:
             return null;
     }
