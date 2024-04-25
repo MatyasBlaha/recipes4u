@@ -11,6 +11,7 @@ import {
 
 
 import {DarkButtonSmall, DivFlex} from "../../../../assets/styles/global";
+import iconClock from "../../../../assets/icons/icon_clock.png";
 
 
 import RecipeImages from "../RecipeImages/RecipeImages";
