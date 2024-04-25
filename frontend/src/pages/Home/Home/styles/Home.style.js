@@ -1,6 +1,6 @@
 import {styled} from "styled-components";
-import introBackground from "../../../assets/intro_Background.jpg";
-import {Input, Select} from "../../../assets/styles/global"
+import introBackground from "../../../../assets/intro_Background.jpg";
+import {Input, Select} from "../../../../assets/styles/global"
 
 export const IntroWrapper = styled.div`
     background-image: url(${introBackground});

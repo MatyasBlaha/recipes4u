@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import {Link} from 'react-router-dom'
 import axios from "axios";
-import {userGetUserID} from "../../hooks/useGetUserID";
+import {userGetUserID} from "../../hooks/useGetUserInfo/useGetUserID";
 
 import {RecipeImage} from "../../assets/styles/global"
 import RecipeComponent from "../../components/Recipe/RecipeComponent";

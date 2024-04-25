@@ -20,11 +20,11 @@ import {
     HomeSelect,
     SearchHeader,
     Header1
-} from "./Home.style";
+} from "./styles/Home.style";
 
 //Import UseGet
-import { userGetUserID } from "../../../hooks/useGetUserID";
-import { useGetUserRole } from "../../../hooks/useGetUserRole";
+import { userGetUserID } from "../../../hooks/useGetUserInfo/useGetUserID";
+import { useGetUserRole } from "../../../hooks/useGetUserInfo/useGetUserRole";
 
 //Import UseApiRequest
 import { UseFetchRecipes } from '../../../hooks/recipe/api/FetchRecipes/UseFetchRecipes';

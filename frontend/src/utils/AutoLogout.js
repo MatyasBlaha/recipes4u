@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import {userGetUserID} from "../hooks/useGetUserID";
+import {userGetUserID} from "../hooks/useGetUserInfo/useGetUserID";
 
 const cookies = new Cookies();
 

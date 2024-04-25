@@ -2,7 +2,7 @@ import {React, useRef, useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 
-import {userGetUserID} from "../../hooks/useGetUserID";
+import {userGetUserID} from "../../hooks/useGetUserInfo/useGetUserID";
 
 import {styled} from "styled-components";
 
