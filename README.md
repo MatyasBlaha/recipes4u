@@ -49,7 +49,7 @@ Then, fill in the necessary details in the `.env` file with your specific config
 
 Get ``admin`` permisions. \
 Be ``administator of the app``. \
-You can ``create recipes``, ``save recipes``\
+You can ``create recipes``, ``save recipes``, ``delete recipes``\
 ``Change password``\
 \
 \
