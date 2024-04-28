@@ -53,7 +53,7 @@ You can ``create recipes``, ``save recipes``\
 ``Change password``\
 \
 \
-All information about usage, examples, or how to get permisions, you can get at:
+All information about project, application, usage, examples, or how to get permisions, you can get at:
 ```bash
   recipe4u/docs ...
 ``` 
