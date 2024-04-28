@@ -7,7 +7,7 @@ recipe4u is a fullstack application, using react, nodeJS and mognoDB. You can lo
 
 1. [installation](#installation)
 2. [configuration](#configuration)
-3. [examples](#usage/examples)
+3. [examples](#examples)
 
 ## Installation
 
@@ -45,7 +45,7 @@ recipe4u is a fullstack application, using react, nodeJS and mognoDB. You can lo
 Enter into backend folder and create a `.env` file in the root directory based on the `.env.example` provided:
 
 Then, fill in the necessary details in the `.env` file with your specific configurations.
-## Examples
+## examples
 
 Get ``admin`` permisions. \
 Be ``administator of the app``. \
