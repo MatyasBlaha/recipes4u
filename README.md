@@ -55,7 +55,7 @@ You can ``create recipes``, ``save recipes``, ``delete recipes``\
 \
 All information about project, application, usage, examples, or how to get permisions, you can get at:
 ```bash
-  recipe4u/docs ...
+  recipes4u/docs ...
 ``` 
 
 
