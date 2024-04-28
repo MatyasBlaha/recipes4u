@@ -7,7 +7,7 @@ recipe4u is a fullstack application, using react, nodeJS and mognoDB. You can lo
 
 1. [installation](#installation)
 2. [configuration](#configuration)
-3. [usage](#usage/examples)
+3. [examples](#usage/examples)
 
 ## Installation
 
@@ -53,9 +53,9 @@ You can ``create recipes``, ``save recipes``\
 ``Change password``\
 \
 \
-All information about application, usage, examples, or how to get permisions, you can get at:
+All information about usage, examples, or how to get permisions, you can get at:
 ```bash
-  recipes4u/docs ...
+  recipe4u/docs ...
 ``` 
 
 
