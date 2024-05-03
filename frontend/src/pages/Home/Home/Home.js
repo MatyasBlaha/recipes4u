@@ -1,151 +1,142 @@
-import { React, useState, useEffect } from 'react';
-import axios from "axios";
-import {userGetUserID} from "../../../hooks/useGetUserID";
-import {useGetUserRole} from "../../../hooks/useGetUserRole"
+import React, { useState, useEffect } from 'react';
+import axios from "../../../services/axiosConfig";
 
+//Import components
 import RecipeComponent from "../../../components/Recipe/RecipeComponent";
-
-import {styled} from "styled-components";
-import {ContentCenter, DivCenter, PrimaryButton} from "../../../assets/styles/global"
-import { HomeForm, HomeInput, HomeSelect, SearchHeader, Header1 } from "./Home.style"
 import Footer from "../../../components/Footer";
-import {IntroWrapper, Overlay} from "./Home.style";
 
+//Import styles
+import {
+    ContentCenter,
+    DivCenter,
+    PrimaryButton
+} from "../../../assets/styles/global";
 
-import deleteRecipe from '../../../components/Recipe/components/RecipeButtons/RecipeButtons';
+import {
+    HomeForm,
+    IntroWrapper,
+    Overlay,
+    HomeInput,
+    HomeSelect,
+    SearchHeader,
+    Header1
+} from "./styles/Home.style";
+
+//Import UseGet
+import { userGetUserID } from "../../../hooks/useGetUserInfo/useGetUserID";
+import { useGetUserRole } from "../../../hooks/useGetUserInfo/useGetUserRole";
+
+//Import UseApiRequest
+import { UseFetchRecipesRequest } from '../../../hooks/recipe/api/FetchRecipesRequest/UseFetchRecipesRequest';
+import { UseFetchSavedRecipes } from '../../../hooks/recipe/api/FetchSavedRecipes/UseFetchSavedRecipes';
+import {UseSaveRecipeRequest} from "../../../hooks/recipe/api/SaveRecipeRequest/UseSaveRecipeRequest";
+import {UseRemoveSavedRecipeRequest} from "../../../hooks/recipe/api/RemoveSavedRecipeRequest/UseRemoveSavedRecipeRequest";
+import {UseDeleteRecipeRequest} from "../../../hooks/recipe/api/DeleteRecipeRequest/UseDeleteRecipeRequest";
 
 
 
 const Home = () => {
+
     const userId = userGetUserID();
     const userRole = useGetUserRole();
 
-    const [recipes, setRecipes] = useState([])
-    const [savedRecipes, setSavedRecipes] = useState([])
-    const [message, setMessage] = useState('')
-
+    const [recipes, setRecipes] = useState([]);
+    const [savedRecipes, setSavedRecipes] = useState([]);
+    const [message, setMessage] = useState('');
     const [searchArea, setSearchArea] = useState('');
-    const [CookingTimeArea, setCookingTimeArea] = useState('');
+    const [cookingTimeArea, setCookingTimeArea] = useState('');
     const [difficultyArea, setDifficultyArea] = useState('');
 
-    useEffect(() => {
 
-        const fetchRecipe = async () => {
-            try {
-                const configuration = {
-                    method: "get",
-                    url: "http://localhost:8080/api/recipe",
-                };
-
-                const result = await axios(configuration);
-                setRecipes(result.data);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-
-        fetchRecipe();
-
-        if(userId) {
-            const fetchSavedRecipe = async () => {
-                try {
-                    const configuration = {
-                        method: "get",
-                        url: `http://localhost:8080/api/savedRecipes/ids/${userId}`,
-                    };
-
-                    const result = await axios(configuration);
-                    setSavedRecipes(result.data.savedRecipes);
-                } catch (err) {
-                    console.log(err);
-                }
-            };
-            fetchSavedRecipe();
+    const fetchRecipes = async () => {
+        try {
+            const data = await UseFetchRecipesRequest();
+            setRecipes(data);
+        } catch (error) {
+            setMessage(error.message);
         }
+    };
 
+    const fetchSavedRecipes = async () => {
+        try {
+            const data = await UseFetchSavedRecipes(userId);
+            setSavedRecipes(data);
+        } catch (error) {
+            setMessage(error.message);
+        }
+    };
+
+
+    useEffect(() => {
+        fetchRecipes();
+
+        if (userId) {
+            fetchSavedRecipes();
+        }
     }, [userId]);
 
-
-    const saveRecipe = async (recipeId) => {
-
-            try {
-
-                const data = {
-                    recipeId,
-                }
-
-                const configuration = {
-                    method: "put",
-                    url: "http://localhost:8080/api/recipe",
-                    data
-                }
-
-                axios(configuration)
-                    .then((result) => {
-                        setSavedRecipes(result.data.savedRecipes)
-                    })
-                    .catch((err) => {
-                        if (err.response) {
-                            setMessage(err.response.data.message);
-                        } else if (err.request) {
-                            setMessage("No response from server");
-                        } else {
-                            console.log('Error', err.message);
-                            setMessage(err.message);
-                        }
-                    })
-            } catch (err) {
-                console.log("Failed to process the request")
-        }
-    }
-
-    const removeSavedRecipe = async (recipeId) => {
-
-        try {
-
-            const data = {
-                 recipeId
-            }
-
-            const configuration = {
-                method: "post",
-                url: `http://localhost:8080/api/removeSavedRecipe`,
-                data
-            }
-
-            axios(configuration)
-                .then((result) => {
-                    setSavedRecipes(result.data.savedRecipes)
-                })
-                .catch((err) => {
-                    console.log(err)
-                })
-        } catch (e) {
-
-        }
-    }
-
-    const isRecipeSaved = (id) => savedRecipes?.includes(id)
 
 
 
     const handleSearch = async (e) => {
         e.preventDefault();
-
         const configuration = {
             method: "get",
-            url: `http://localhost:8080/api/recipes/search?name=${searchArea}&CookingTime=${CookingTimeArea}&difficulty=${difficultyArea}`,
+            url: `/api/recipes/search?name=${searchArea}&CookingTime=${cookingTimeArea}&difficulty=${difficultyArea}`,
         }
-
         axios(configuration)
             .then((result) => {
-                 setRecipes(result.data)
-             })
+                setRecipes(result.data)
+            })
             .catch((err) => {
-                 console.log(err)
-             })
-    }
+                console.log(err)
+            })
+    };
 
+
+
+
+    const saveRecipe = async (recipeId) => {
+        try {
+            const savedRecipes = await UseSaveRecipeRequest(recipeId);
+            console.log()
+            setSavedRecipes(savedRecipes);
+        } catch (error) {
+            setMessage(error.message);
+        }
+    };
+
+    const removeSavedRecipe = async (recipeId) => {
+        try {
+            const savedRecipes = await UseRemoveSavedRecipeRequest(recipeId);
+            setSavedRecipes(savedRecipes);
+        } catch (err) {
+            setMessage(err.message);
+            console.log(err)
+        }
+    };
+
+    const isRecipeSaved = (id) => savedRecipes?.includes(id)
+
+
+
+
+    const deleteRecipe = async (recipeId) => {
+        try {
+            await UseDeleteRecipeRequest(recipeId);
+
+            if (savedRecipes && savedRecipes.length > 0) {
+                setSavedRecipes(prevSavedRecipes => prevSavedRecipes.filter(recipe => recipe && recipe._id !== recipeId));
+            }
+
+            if (recipes && recipes.length > 0) {
+                setRecipes(prevRecipes => prevRecipes.filter(recipe => recipe && recipe._id !== recipeId));
+            }
+
+        } catch (error) {
+            setMessage(error.message);
+        }
+    };
 
 
 
@@ -154,6 +145,8 @@ const Home = () => {
             alert(message);
         }
     }, [message]);
+
+
 
     return (
         <div>
@@ -164,16 +157,14 @@ const Home = () => {
                             <DivCenter>
                                 <SearchHeader>Search for Recipe</SearchHeader>
                             </DivCenter>
-
                             <HomeInput
                                 type="text"
                                 placeholder="Search for a recipe"
                                 value={searchArea}
                                 onChange={(e) => setSearchArea(e.target.value)}
                             />
-
                             <HomeSelect
-                                value={CookingTimeArea}
+                                value={cookingTimeArea}
                                 onChange={(e) => setCookingTimeArea(e.target.value)}
                             >
                                 <option value="">Select cooking time</option>
@@ -186,7 +177,6 @@ const Home = () => {
                                 <option value="150">150</option>
                                 <option value="180">180</option>
                             </HomeSelect>
-
                             <HomeSelect
                                 value={difficultyArea}
                                 onChange={(e) => setDifficultyArea(e.target.value)}
@@ -196,33 +186,29 @@ const Home = () => {
                                 <option value="medium">Medium</option>
                                 <option value="hard">Hard</option>
                             </HomeSelect>
-
                             <DivCenter>
-                                <PrimaryButton style={{marginTop: "40px"}} type="submit">search</PrimaryButton>
+                                <PrimaryButton style={{ marginTop: "40px" }} type="submit">search</PrimaryButton>
                             </DivCenter>
                         </HomeForm>
                     </ContentCenter>
                 </Overlay>
             </IntroWrapper>
-
             {recipes && (
                 <div>
                     <DivCenter>
-                        <Header1 style={{margin: "60px 0 20px 0 "}}>Recipes for today</Header1>
+                        <Header1 style={{ margin: "60px 0 20px 0 " }}>Recipes for today</Header1>
                     </DivCenter>
                     <ul>
-                       <div>
+                        <div>
                             {recipes.map((recipe) => (
                                 <RecipeComponent
                                     key={recipe._id}
                                     recipe={recipe}
-
                                     recipeButtons="main"
                                     saveRecipe={saveRecipe}
                                     removeSavedRecipe={removeSavedRecipe}
                                     deleteRecipe={() => deleteRecipe(recipe._id)}
                                     isRecipeSaved={isRecipeSaved(recipe._id)}
-
                                     userRole={userRole}
                                     message={message}
                                     displayMode="single"
@@ -233,9 +219,9 @@ const Home = () => {
                     </ul>
                 </div>
             )}
-            <Footer/>
+            <Footer />
         </div>
     )
-}
+};
 
 export default Home;

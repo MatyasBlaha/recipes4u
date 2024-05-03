@@ -2,7 +2,7 @@ import {React, useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     IconButton,
-    Img,
+    Img, InstructionsParagraph,
     RecipeContainer,
     RecipeContentContainer,
     RecipeWrapper
@@ -13,7 +13,7 @@ import {DivFlex} from "../../../../assets/styles/global";
 import iconClock from "../../../../assets/icons/icon_clock.png";
 import RecipeImages from "../RecipeImages/RecipeImages";
 
-const RecipePreviewContent = ({recipe, displayMode, editRecipe, recipeButtons, deleteRecipe, userRole, saveRecipe, removeSavedRecipe, isRecipeSaved, showDetailsLink }) => {
+const RecipePreviewContent = ({recipe, displayMode, editRecipe, recipeButtons, deleteRecipe, userRole, saveRecipe, removeSavedRecipe, isRecipeSaved, showDetailsLink, message }) => {
 const navigate = useNavigate()
 
 
@@ -49,7 +49,11 @@ const navigate = useNavigate()
             <RecipeContainer>
                 <div>
                     {editRecipe === 'editRecipe' &&
-                        <Link to={`/Profile/editRecipe/${recipe._id}`}>Edit</Link>
+                        <div>
+                            <Link to={`/Profile/editRecipe/${recipe._id}`}>Edit</Link>
+                            <p>{message}</p>
+                        </div>
+
                     }
                     <RecipeButtons recipeButtons={recipeButtons} deleteRecipe={deleteRecipe} userRole={userRole} recipeId={recipe._id} saveRecipe={saveRecipe} removeSavedRecipe={removeSavedRecipe} isRecipeSaved={isRecipeSaved} />
                 </div>
@@ -66,7 +70,7 @@ const navigate = useNavigate()
                                 </DivFlex>
                                 <p>Difficulty: {recipe.difficulty}</p>
                             </DivFlex>
-                            <p style={{marginBottom:"10px"}}>{truncateText(recipe.instructions)}</p>
+                            <InstructionsParagraph>{truncateText(recipe.instructions)}</InstructionsParagraph>
                         </div>
                         <div>
                             <RecipeImages recipe={recipe} displayMode={displayMode} />

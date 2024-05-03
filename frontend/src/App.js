@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route,} from 'react-router-dom';
 
-
 import {ThemeProvider, styled} from "styled-components";
 import {lightTheme, GlobalStyle} from "./styles/theme"
 import {ContentContainer} from "./assets/styles/global";
@@ -25,58 +24,10 @@ import RecipeDetails from "./pages/Home/RecipeDetails";
 import {DivFlex, DivFlexSpaceBetween, LinkButton} from "./assets/styles/global";
 
 
-
 const cookies = new Cookies();
 
 
-
-
-
 // ********* STYLES **************** //
-const Label = styled.label `
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 20px;
-    margin-left: 20px;
-`
-
-const Input = styled.input `
-    opacity: 0;
-    width: 0;
-    height: 0;
-    
-    &:checked + :before {
-        -ms-transform: translateX(34px);
-        transform: translateX(34px);
-    }
-    `
-
-const Span = styled.span`
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    border-radius: 34px;
-    -webkit-transition: .4s;
-    transition: .4s;
-    
-    &:before {
-        position: absolute;
-        content: "";
-        height: 16px;
-        width: 16px;
-        left: 2px;
-        bottom: 2px;
-        background-color: white;
-        border-radius: 50%;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
-    `
 
 const NavbarContainer = styled.div`
     position: fixed;
@@ -90,14 +41,7 @@ const NavbarContainer = styled.div`
 
 `
 
-
-
-
-
 function App() {
-
-
-
 
     const [isAuthenticated, setIsAuthenticated] = useState(false)
 
@@ -110,11 +54,6 @@ function App() {
 
 
     const [isProfileHovered, setProfileHovered] = useState(false)
-
-
-
-
-
 
 
 
@@ -157,7 +96,11 @@ function App() {
                         <ContentContainer>
                             <Routes>
                                 <Route exact path="/" element={<Home />} />
-                                <Route exact path="/Login" element={<Login />} />
+                                <Route
+                                    exact
+                                    path="/Login"
+                                    element={<Login isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}
+                                />
                                 <Route exact path="/register" element={<Register />} />
                                 <Route element={<ProtectedRoute />}>
                                     <Route excact path="/Profile/*" element={<Profile/>}/>

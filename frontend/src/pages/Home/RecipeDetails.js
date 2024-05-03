@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../services/axiosConfig'
 import { useParams } from 'react-router-dom';
-import {RecipeImage} from "../../assets/styles/global";
 import RecipeComponent from "../../components/Recipe/RecipeComponent";
 import Footer from "../../components/Footer";
 
@@ -13,7 +12,7 @@ const RecipeDetails = () => {
     useEffect(() => {
         const fetchRecipeDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/recipe/${recipeId}`);
+                const response = await axios.get(`/api/recipe/${recipeId}`);
                 setRecipe(response.data);
             } catch (error) {
                 console.error('Error fetching recipe details:', error);

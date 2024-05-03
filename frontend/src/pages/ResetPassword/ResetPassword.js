@@ -1,8 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
-import axios from 'axios';
+import axios from "../../services/axiosConfig";
 
-import { LinkButton } from "../../assets/styles/global"
 import PasswordValidation from "../../utils/PasswordValidation";
 
 
@@ -41,7 +40,7 @@ const ResetPassword = () => {
 
         const configuration = {
             method: "post",
-            url: "http://localhost:8080/api/resetPassword",
+            url: "/api/resetPassword",
             data: data
         }
 
@@ -58,7 +57,7 @@ const ResetPassword = () => {
 
 
     return (
-        <div>
+        <div style={{paddingTop: "100px", height: "500px"}}>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Nove heslo:</label>

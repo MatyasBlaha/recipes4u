@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Cookies from 'universal-cookie';
 import { useLocation } from 'react-router-dom';
-import { LinkButton, DivFlexColumn } from "../../../assets/styles/global";
-import { SidebarContainer, ActiveLinkButton, Sidebar, ToggleButtonContainer, ToggleButton, Hamburger } from "./ProfileSidebar.style";
+import { SidebarContainer, ActiveLinkButton, Sidebar, ToggleButtonContainer, ToggleButton, Hamburger } from "./styles/ProfileSidebar.style";
 
 const ProfileSidebar = () => {
     const cookies = new Cookies();
@@ -43,6 +42,10 @@ const ProfileSidebar = () => {
         }
     };
 
+    const handleLinkClick = () => {
+        closeSidebar();
+    };
+
     const isActive = (path) => {
         return location.pathname.startsWith(path);
     };
@@ -56,13 +59,13 @@ const ProfileSidebar = () => {
             </ToggleButtonContainer>
             <Sidebar isOpen={isOpen}>
                 <div>
-                    <ActiveLinkButton to="/Profile" end onClick={closeSidebar} style={isActive("/Profile") ? {backgroundColor: '#e0e0e0'} : {}}>Profile</ActiveLinkButton>
-                    <ActiveLinkButton to="/Profile/MyReceipts" onClick={closeSidebar} className={isActive("/Profile/MyReceipts") ? "active" : ""}>moje recepty</ActiveLinkButton>
-                    <ActiveLinkButton to="/Profile/CreateRecipe" onClick={closeSidebar} className={isActive("/Profile/CreateRecipe") ? "active" : ""}>create recipe</ActiveLinkButton>
-                    <ActiveLinkButton to="/Profile/SavedRecipes" onClick={closeSidebar} className={isActive("/Profile/SavedRecipes") ? "active" : ""}>saved recipes</ActiveLinkButton>
+                    <ActiveLinkButton to="/Profile" end onClick={handleLinkClick} style={isActive("/Profile") ? {backgroundColor: '#e0e0e0'} : {}}>Profile</ActiveLinkButton>
+                    <ActiveLinkButton to="/Profile/MyReceipts" onClick={handleLinkClick} className={isActive("/Profile/MyReceipts") ? "active" : ""}>moje recepty</ActiveLinkButton>
+                    <ActiveLinkButton to="/Profile/CreateRecipe" onClick={handleLinkClick} className={isActive("/Profile/CreateRecipe") ? "active" : ""}>create recipe</ActiveLinkButton>
+                    <ActiveLinkButton to="/Profile/SavedRecipes" onClick={handleLinkClick} className={isActive("/Profile/SavedRecipes") ? "active" : ""}>saved recipes</ActiveLinkButton>
                 </div>
                 <div>
-                    <ActiveLinkButton onClick={handleLogout}>Odhlásit</ActiveLinkButton>
+                    <ActiveLinkButton onClick={handleLogout}>Logout</ActiveLinkButton>
                 </div>
             </Sidebar>
         </SidebarContainer>

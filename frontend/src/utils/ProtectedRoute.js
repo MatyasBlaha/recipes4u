@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
-import axios from "axios";
+import axios from "../services/axiosConfig";
 
 
 const ProtectedRoute = () => {
@@ -10,7 +10,7 @@ const ProtectedRoute = () => {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/api/auth-endpoint");
+                const response = await axios.get("/api/auth-endpoint", {withCredentials: true});
 
                 const isAuthenticated = response.data.message
 

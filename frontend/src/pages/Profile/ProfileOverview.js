@@ -3,7 +3,7 @@ import iconEdit from '../../assets/icons/icon_edit.png'
 
 import {styled} from "styled-components";
 import {LinkButton, DivFlexColumn} from "../../assets/styles/global"
-import axios from "axios";
+import axios from "../../services/axiosConfig";
 
 export const Icon = styled.img`
     height: 15px;
@@ -21,7 +21,7 @@ const ProfileOverview = () => {
     useEffect(() => {
         const token = document.cookie.split('; ').find(row => row.startsWith('token')).split('=')[1];
 
-        axios.get('http://localhost:8080/api/userInfo', {
+        axios.get('/api/userInfo', {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -51,7 +51,7 @@ const ProfileOverview = () => {
 
                 const configuration = {
                     method: "post",
-                    url: "http://localhost:8080/api/forgotPassword",
+                    url: "/api/forgotPassword",
                     data: data
                 }
 

@@ -6,7 +6,6 @@ async function dbConnect(){
     mongoose.connect(
         process.env.MONGODB_URL,
         {
-            //check if connection is done properly
         }
     ).then(() => {
         console.log('successfully connected to MongoDB')

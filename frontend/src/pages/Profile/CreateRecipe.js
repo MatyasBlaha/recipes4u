@@ -1,8 +1,8 @@
 import {React, useRef, useState} from 'react';
-import axios from 'axios';
+import axios from "../../services/axiosConfig";
 import { useNavigate } from 'react-router-dom'
 
-import {userGetUserID} from "../../hooks/useGetUserID";
+import {userGetUserID} from "../../hooks/useGetUserInfo/useGetUserID";
 
 import {styled} from "styled-components";
 
@@ -113,7 +113,7 @@ const CreateRecipe = () => {
 
         const configuration = {
             method: "post",
-            url: "http://localhost:8080/api/recipe",
+            url: "/api/recipe",
             data: formData
         }
 

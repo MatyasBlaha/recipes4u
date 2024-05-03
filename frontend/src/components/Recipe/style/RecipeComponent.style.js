@@ -59,6 +59,10 @@ export const Img = styled.img`
     padding: 10px;
 `
 
+export const InstructionsParagraph = styled.p`
+margin-bottom: 10px;
+    word-break: break-all;
+`
 
 
 

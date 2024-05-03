@@ -8,14 +8,19 @@ exports.auth = async (req, res, next) => {
 
     try {
         const token = req.cookies.token
-        const decodedToken = await jwt.verify(token, process.env.JWT_SECRET_KEY);
 
+        if (!token) {
+            return res.status(401).json({ message: "Please, login" });
+        }
+
+
+        const decodedToken = await jwt.verify(token, process.env.JWT_SECRET_KEY);
         const user = await decodedToken
         req.user =  user;
 
         next();
     } catch (err) {
-        return res.status(401).json({ message: "Invalid token, please login" });
+        return res.status(401).json({ message: "Please login" });
     }
 };
 

@@ -1,20 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useLocation} from 'react-router-dom'
-import axios from 'axios';
+import axios from '../../services/axiosConfig';
+import {useNavigate} from "react-router-dom";
 import Cookies from 'universal-cookie'
 import {styled} from "styled-components";
 
 import {
     LoginWrapper,
     PrimaryLink,
-    DivFlexColumn,
     ContentWrapper,
     ContentCenter,
-    DivFlexSpaceBetween,
     PrimarySpan,
     DarkButton,
     DarkButtonSmall,
-    DangerButtonSmall,
     Input, DivFlex,
     LoginContainer,
     LoginSideContainer,
@@ -36,9 +33,10 @@ const cookies = new Cookies();
 
 
 
-const Login = () => {
-    const [showPassword, setShowPassword] = useState(false);
+const Login = ({ setIsAuthenticated }) => {
+    const navigate = useNavigate()
 
+    const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [verified, setVerified] = useState(false)
@@ -55,7 +53,7 @@ const Login = () => {
         }
         const configurationOTP = {
             method: "post",
-            url: "http://localhost:8080/api/verifyOTP",
+            url: "/api/verifyOTP",
             data: dataOTP
         }
 
@@ -67,7 +65,7 @@ const Login = () => {
                 new Error()
                 setLogin(false)
                 console.log(err.message)
-                // setLoginMessage("Login wasn't successful")
+                setLoginMessage("Login wasn't successful")
             })
 
 
@@ -79,7 +77,7 @@ const Login = () => {
 
         const confiiguration = {
             method: "post",
-            url: "http://localhost:8080/api/login",
+            url: "/api/login",
             data: data
         };
 
@@ -87,6 +85,8 @@ const Login = () => {
 
         axios(confiiguration)
             .then((result) => {
+                console.log(result.data.token)
+                console.log(result.data.role)
                 cookies.set('token', result.data.token, {
                     path: '/'
                 });
@@ -94,14 +94,16 @@ const Login = () => {
                     path: '/'
                 })
 
-                window.location.href = "/Profile"
+                // window.location.href = "/Profile"
                 const configuration2 = {
                     method: "get",
-                    url: "http://localhost:8080/api/auth-endpoint"
+                    url: "/api/auth-endpoint",
                 }
                 axios(configuration2)
                     .then((result) => {
                         setLogin(true)
+                        setIsAuthenticated(true);
+                        navigate('/Profile')
                         setLoginMessage(result.data.message)
                     })
                     .catch((error) => {
@@ -109,6 +111,7 @@ const Login = () => {
                         setLoginMessage(error.message)
                         const logout = () => {
                             cookies.remove("token", { path: "/" });
+                            cookies.remove("role", { path: "/" });
                             window.location.reload();
                         };
                         logout()
@@ -136,7 +139,7 @@ const Login = () => {
 
                 const configuration = {
                     method: "post",
-                    url: "http://localhost:8080/api/forgotPassword",
+                    url: "http://localhost:3000/api/forgotPassword",
                     data: data
                 }
 

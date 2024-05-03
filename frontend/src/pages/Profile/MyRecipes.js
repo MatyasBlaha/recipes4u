@@ -1,16 +1,16 @@
 import { React, useState, useEffect } from 'react';
-import {Link} from 'react-router-dom'
-import axios from "axios";
-import {userGetUserID} from "../../hooks/useGetUserID";
+import axios from "../../services/axiosConfig";
+import {userGetUserID} from "../../hooks/useGetUserInfo/useGetUserID";
 
-import {RecipeImage} from "../../assets/styles/global"
 import RecipeComponent from "../../components/Recipe/RecipeComponent";
 
 import deleteRecipe from '../../components/Recipe/components/RecipeButtons/RecipeButtons';
+import {UseDeleteRecipeRequest} from "../../hooks/recipe/api/DeleteRecipeRequest/UseDeleteRecipeRequest";
 
 const MyRecipes = () => {
     const userId = userGetUserID();
 
+    const [recipes, setRecipes] = useState([]);
     const [message, setMessage] = useState('')
     const [savedRecipes, setSavedRecipes] = useState([]);
     const [editingRecipe, setEditingRecipe] = useState({
@@ -25,7 +25,7 @@ const MyRecipes = () => {
     useEffect( () => {
         const fetchSavedRecipe = async () => {
             try {
-                const result = await axios.get(`http://localhost:8080/api/myRecipes/${userId}`);
+                const result = await axios.get(`/api/myRecipes/${userId}`);
                 setSavedRecipes(result.data.myRecipes);
             } catch (err) {
                 console.log(err);
@@ -36,6 +36,22 @@ const MyRecipes = () => {
         fetchSavedRecipe()
     }, [])
 
+    const deleteRecipe = async (recipeId) => {
+        try {
+            await UseDeleteRecipeRequest(recipeId);
+
+            if (savedRecipes && savedRecipes.length > 0) {
+                setSavedRecipes(prevSavedRecipes => prevSavedRecipes.filter(recipe => recipe && recipe._id !== recipeId));
+            }
+
+            if (recipes && recipes.length > 0) {
+                setRecipes(prevRecipes => prevRecipes.filter(recipe => recipe && recipe._id !== recipeId));
+            }
+
+        } catch (error) {
+            setMessage(error.message);
+        }
+    };
 
     return (
         <div>

@@ -1,8 +1,8 @@
 import React, {useState, useEffect } from 'react';
-import { useNavigate, useParams, useLocation } from 'react-router-dom'
-import axios from 'axios';
+import { useNavigate,  useLocation } from 'react-router-dom'
+import axios from "../../services/axiosConfig";
 
-import { LinkButton } from "../../assets/styles/global"
+import {DivFlex, LinkButton} from "../../assets/styles/global"
 
 
 const VerifyEmail = () => {
@@ -51,7 +51,7 @@ const VerifyEmail = () => {
 
         const configurationOTP = {
             method: "post",
-            url: "http://localhost:8080/api/verifyOTP",
+            url: "/api/verifyOTP",
             data: dataOTP
         };
 
@@ -69,17 +69,19 @@ const VerifyEmail = () => {
 
 
     return (
-        <div>
+        <div style={{paddingTop: "100px", height: "500px"}}>
             <h1>Email Verification</h1>
-            <form onSubmit={(e) => verifyOTP(e)}>
-                <label htmlFor="code">Enter verification code:</label><br/>
-                <input type="text" pattern="[0-9]{4}" required
-                       onChange={(e) => setVerified(e.target.value)}/>
-                <input type="hidden" name="userId" value="{{userId}}"/>
-                <input type="submit" value="Verify"/>
-            </form>
+            <DivFlex>
+                <form onSubmit={(e) => verifyOTP(e)}>
+                    <label htmlFor="code">Enter verification code:</label><br/>
+                    <input type="text" pattern="[0-9]{4}" required
+                           onChange={(e) => setVerified(e.target.value)}/>
+                    <input type="hidden" name="userId" value="{{userId}}"/>
+                    <input type="submit" value="Verify"/>
+                </form>
+                <LinkButton to="/Login">Login</LinkButton>
+            </DivFlex>
             <p>{registerMessage}</p>
-            <LinkButton to="/Login">Login</LinkButton>
         </div>
     )
 }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "../../services/axiosConfig";
 import { useParams } from 'react-router-dom';
 import {RecipeImage} from "../../assets/styles/global";
-import {userGetUserID} from "../../hooks/useGetUserID";
+import {userGetUserID} from "../../hooks/useGetUserInfo/useGetUserID";
 
 import {styled} from "styled-components";
 
@@ -31,7 +31,7 @@ const EditRecipe = () => {
     useEffect(() => {
         const fetchRecipeDetails = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/recipe/${recipeId}`);
+                const response = await axios.get(`/api/recipe/${recipeId}`);
                 const fetchedRecipe = response.data;
                 setRecipe(fetchedRecipe);
                 setEditingRecipe({
@@ -57,7 +57,7 @@ const EditRecipe = () => {
 
             const configuration = {
                 method: "post",
-                url: `http://localhost:8080/api/editRecipe/${recipeId}`,
+                url: `/api/editRecipe/${recipeId}`,
                 data: editingRecipe
             }
 

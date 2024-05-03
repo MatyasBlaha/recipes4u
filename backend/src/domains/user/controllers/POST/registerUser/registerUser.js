@@ -9,17 +9,30 @@ exports.registerUser = async (req, res) => {
 
 
         const existingUser = await User.findOne({ email });
+        console.log(existingUser)
         if (existingUser) {
 
-            await sendOTPVerificationEmail(existingUser, res);
-            return res.json({
-                status: 'Pending',
-                message: 'User already exists. OTP sent to your email for verification.',
-                data: {
-                    userId: existingUser._id,
-                    email,
-                }
-            });
+               if(existingUser.verified === true) {
+                   return res.json({
+                       status: 'Finished',
+                       message: 'User already exists and it\'s verified',
+                       data: {
+                           userId: existingUser._id,
+                           email,
+                       }
+                   });
+               } else {
+                   await sendOTPVerificationEmail(existingUser, res);
+                   return res.json({
+                       status: 'Pending',
+                       message: 'User already exists. OTP sent to your email for verification.',
+                       data: {
+                           userId: existingUser._id,
+                           email,
+                       }
+                   });
+               }
+
         }
 
 

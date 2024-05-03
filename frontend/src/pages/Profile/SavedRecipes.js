@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from 'react';
-import axios from "axios";
-import {userGetUserID} from "../../hooks/useGetUserID";
+import axios from "../../services/axiosConfig";
+import {userGetUserID} from "../../hooks/useGetUserInfo/useGetUserID";
 
 import {RecipeImage} from "../../assets/styles/global"
 import RecipeComponent from "../../components/Recipe/RecipeComponent";
@@ -16,7 +16,7 @@ const SavedRecipes = () => {
             try {
                 const configuration = {
                     method: "get",
-                    url: `http://localhost:8080/api/savedRecipes/${userId}`,
+                    url: `/api/savedRecipes/${userId}`,
                 }
 
                 axios(configuration)

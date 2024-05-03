@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom'
-import axios from 'axios';
+import axios from "../../services/axiosConfig";
 
 
 // UTILS
@@ -11,7 +10,6 @@ import {
     PrimaryLink,
     ContentWrapper,
     ContentCenter,
-    DivFlexSpaceBetween,
     PrimarySpan,
     DarkButton,
     Input,
@@ -39,7 +37,6 @@ const Register = () => {
 
 
 
-// SUBMIT REGISTER FORM DATA'S //
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -49,9 +46,9 @@ const Register = () => {
             password: password
         };
 
-        // PASSWORD VALIDATION
         const validationMessage = PasswordValidation(password);
         if (validationMessage) {
+            console.log(validationMessage)
             setMessage(validationMessage);
             return;
         }
@@ -59,7 +56,7 @@ const Register = () => {
 
         const configuration = {
             method: "post",
-            url: "http://localhost:8080/api/register",
+            url: "/api/register",
             data: data
         };
 
@@ -76,9 +73,6 @@ const Register = () => {
     };
 
 
-
-
-
     const resendOTP = () => {
         const data = {
             userId: userId,
@@ -87,7 +81,7 @@ const Register = () => {
 
         const configuration = {
             method: "post",
-            url: "http://localhost:8080/api/resendOTPVerify",
+            url: "/api/resendOTPVerify",
             data: data
         };
 
