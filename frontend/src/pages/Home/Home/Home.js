@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import axios from "../../../services/axiosConfig";
+=======
+import axios from "axios";
+>>>>>>> 6e233c9a8297d1e75273318ca2e54361804bcbbf
 
 //Import components
 import RecipeComponent from "../../../components/Recipe/RecipeComponent";
@@ -27,7 +31,11 @@ import { userGetUserID } from "../../../hooks/useGetUserInfo/useGetUserID";
 import { useGetUserRole } from "../../../hooks/useGetUserInfo/useGetUserRole";
 
 //Import UseApiRequest
+<<<<<<< HEAD
 import { UseFetchRecipesRequest } from '../../../hooks/recipe/api/FetchRecipesRequest/UseFetchRecipesRequest';
+=======
+import { UseFetchRecipes } from '../../../hooks/recipe/api/FetchRecipes/UseFetchRecipes';
+>>>>>>> 6e233c9a8297d1e75273318ca2e54361804bcbbf
 import { UseFetchSavedRecipes } from '../../../hooks/recipe/api/FetchSavedRecipes/UseFetchSavedRecipes';
 import {UseSaveRecipeRequest} from "../../../hooks/recipe/api/SaveRecipeRequest/UseSaveRecipeRequest";
 import {UseRemoveSavedRecipeRequest} from "../../../hooks/recipe/api/RemoveSavedRecipeRequest/UseRemoveSavedRecipeRequest";
@@ -50,7 +58,11 @@ const Home = () => {
 
     const fetchRecipes = async () => {
         try {
+<<<<<<< HEAD
             const data = await UseFetchRecipesRequest();
+=======
+            const data = await UseFetchRecipes();
+>>>>>>> 6e233c9a8297d1e75273318ca2e54361804bcbbf
             setRecipes(data);
         } catch (error) {
             setMessage(error.message);
@@ -82,7 +94,11 @@ const Home = () => {
         e.preventDefault();
         const configuration = {
             method: "get",
+<<<<<<< HEAD
             url: `/api/recipes/search?name=${searchArea}&CookingTime=${cookingTimeArea}&difficulty=${difficultyArea}`,
+=======
+            url: `http://localhost:8080/api/recipes/search?name=${searchArea}&CookingTime=${cookingTimeArea}&difficulty=${difficultyArea}`,
+>>>>>>> 6e233c9a8297d1e75273318ca2e54361804bcbbf
         }
         axios(configuration)
             .then((result) => {
@@ -99,7 +115,10 @@ const Home = () => {
     const saveRecipe = async (recipeId) => {
         try {
             const savedRecipes = await UseSaveRecipeRequest(recipeId);
+<<<<<<< HEAD
             console.log()
+=======
+>>>>>>> 6e233c9a8297d1e75273318ca2e54361804bcbbf
             setSavedRecipes(savedRecipes);
         } catch (error) {
             setMessage(error.message);
@@ -110,9 +129,14 @@ const Home = () => {
         try {
             const savedRecipes = await UseRemoveSavedRecipeRequest(recipeId);
             setSavedRecipes(savedRecipes);
+<<<<<<< HEAD
         } catch (err) {
             setMessage(err.message);
             console.log(err)
+=======
+        } catch (error) {
+            setMessage(error.message);
+>>>>>>> 6e233c9a8297d1e75273318ca2e54361804bcbbf
         }
     };
 

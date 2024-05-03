@@ -4,7 +4,11 @@ import RecipeDetailContent from "./components/RecipeDetailContent/RecipeDetailCo
 import RecipePreviewContent from "./components/RecipePreviewContent/RecipePreviewContent";
 
 
+<<<<<<< HEAD
 const RecipeComponent = ({ recipe, displayMode, showDetailsLink, recipeButtons, saveRecipe, removeSavedRecipe, editRecipe, deleteRecipe, isRecipeSaved, userRole, message}) => {
+=======
+const RecipeComponent = ({ recipe, displayMode, showDetailsLink, recipeButtons, saveRecipe, removeSavedRecipe, editRecipe, deleteRecipe, isRecipeSaved, userRole, }) => {
+>>>>>>> 6e233c9a8297d1e75273318ca2e54361804bcbbf
     return (
         <div>
             {showDetailsLink ? (
