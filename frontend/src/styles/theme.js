@@ -16,6 +16,21 @@ export const GlobalStyle = createGlobalStyle`
         transition: all 0.2s ease;
     }
     
+    a,p,div, button, link{
+        font-size: 1rem;
+
+        @media screen and (max-width: 770px) {
+            font-size: 0.8rem!important;
+        }
+    }
+    
+    h4 {
+        font-size: 1rem;
+
+        @media screen and (max-width: 770px) {
+            font-size: 1.2rem!important;
+        }
+    }
     
     h2 {
         font-weight: 400;

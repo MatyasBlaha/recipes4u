@@ -59,6 +59,8 @@ export const LinkButton = styled(Link) `
     padding: 12px 44px;
     border-radius: 8px;
     text-decoration: none;
+    
+
 `
 
 export const PrimaryLink = styled(LinkButton) `
@@ -99,6 +101,10 @@ export const DarkButtonSmall = styled(DarkButton)`
     font-style: italic;
     font-size: 14px;
     padding: 8px 14px;
+
+    @media  (max-width: 400px) {
+        padding: 4px 7px;
+    }
 `
 export const DangerButtonSmall = styled(DarkButtonSmall)`
     background: ${({ theme }) => theme.danger};
@@ -126,6 +132,11 @@ export const Input = styled.input`
     &:-webkit-autofill {
         -webkit-box-shadow: 0 0 0px 1000px ${({ theme }) => theme.componentBackground} inset;
         -webkit-text-fill-color: ${({ theme }) => theme.secondText} !important;
+    }
+
+    @media  (max-width: 400px) {
+        padding: 6px 10px;
+        font-size: 0.7rem;
     }
 `
 
@@ -201,6 +212,15 @@ export const LoginContainer = styled.div`
             height: 60%;
         }
     }
+
+    @media  (max-width: 400px) {
+        flex-direction: column;
+        height: 350px;
+
+        & > div:nth-child(1) {
+            height: 40%;
+        }
+    }
 `
 
 
@@ -232,6 +252,19 @@ export const LoginSideContentContainer = styled.div`
         align-content: center;
         margin-bottom: 40px;
     }
+
+    @media  (max-width: 400px) {
+        p {
+            display: none;
+        }
+        
+        h4 {
+            font-size: 19px !important;
+            margin-bottom: 10px;
+        }
+        
+        padding: 20px 0;
+    }
 `
 
 
@@ -256,6 +289,10 @@ export const LoginFormWrapper = styled.div`
 export const Form = styled.form`
     height: 90%;
     width: 80%;
+
+    @media screen and (max-width: 770px) {
+        height: 350px;
+    }
 `
 
 export const LoginFormContainer = styled.div`
@@ -265,7 +302,10 @@ export const LoginFormContainer = styled.div`
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    
+
+    @media  (max-width: 400px) {
+        justify-content: space-between;
+    }
 `
 
 export const LoginFormInputs = styled.div`
@@ -278,6 +318,10 @@ export const LoginFormInputs = styled.div`
 
 export const LabelContainer = styled.div`
     margin: 10px 0;
+
+    @media  (max-width: 400px) {
+     margin: 5px 0;
+    }
 `
 
 export const DangerButtonClose = styled(DangerButtonSmall)`

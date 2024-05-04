@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from '../../services/axiosConfig'
 import { useParams } from 'react-router-dom';
 import RecipeComponent from "../../components/Recipe/RecipeComponent";
-import Footer from "../../components/Footer";
+import Footer from "../../components/Footer/Footer";
 
 const RecipeDetails = () => {
     const { recipeId } = useParams();

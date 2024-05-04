@@ -2,11 +2,13 @@ import react from 'react';
 import { useNavigate } from 'react-router-dom';
 import RecipeButtons from "../RecipeButtons/RecipeButtons";
 import {
+    RecipeHeight,
     DivFlexRecipeImgAndIngredients,
     IconButton,
     Img,
     InstructionContainer,
-    RecipeDetailWrapper, RecipeWrapper
+    RecipeDetailWrapper,
+    RecipeWrapper, InstructionsParagraph
 } from "../../style/RecipeComponent.style";
 
 
@@ -26,36 +28,38 @@ const RecipeDetailContent = ({recipe, recipeButtons, isRecipeSaved, removeSavedR
     }
 
     return (
-        <RecipeWrapper>
-            <RecipeButtons recipeButtons={recipeButtons} deleteRecipe={deleteRecipe} userRole={userRole} recipeId={recipe._id} saveRecipe={saveRecipe} removeSavedRecipe={removeSavedRecipe} isRecipeSaved={isRecipeSaved} />
-            <div style={{paddingTop: "150px", marginBottom: "70px"}}>
-                <RecipeDetailWrapper>
-                    <div>
-                        <DarkButtonSmall onClick={handleReturn}>Back to home</DarkButtonSmall>
-                        <div style={{paddingTop: "30px"}}>
-                            <h2>{recipe.name}</h2>
-                            <DivFlex style={{alignItems: "center"}}>
-                                <DivFlex style={{alignItems: "center", marginRight: "20px"}}>
-                                    <IconButton style={{margin: "0"}}>
-                                        <Img src={iconClock} alt="Cooking Time"></Img>
-                                    </IconButton>
-                                    <p>{recipe.CookingTime} minutes</p>
+        <RecipeHeight>
+            <RecipeWrapper>
+                <RecipeButtons recipeButtons={recipeButtons} deleteRecipe={deleteRecipe} userRole={userRole} recipeId={recipe._id} saveRecipe={saveRecipe} removeSavedRecipe={removeSavedRecipe} isRecipeSaved={isRecipeSaved} />
+                <div style={{paddingTop: "150px", marginBottom: "70px"}}>
+                    <RecipeDetailWrapper>
+                        <div>
+                            <DarkButtonSmall onClick={handleReturn}>Back to home</DarkButtonSmall>
+                            <div style={{paddingTop: "30px"}}>
+                                <h2>{recipe.name}</h2>
+                                <DivFlex style={{alignItems: "center"}}>
+                                    <DivFlex style={{alignItems: "center", marginRight: "20px"}}>
+                                        <IconButton style={{margin: "0"}}>
+                                            <Img src={iconClock} alt="Cooking Time"></Img>
+                                        </IconButton>
+                                        <p>{recipe.CookingTime} minutes</p>
+                                    </DivFlex>
+                                    <p>Difficulty: {recipe.difficulty}</p>
                                 </DivFlex>
-                                <p>Difficulty: {recipe.difficulty}</p>
-                            </DivFlex>
-                            <DivFlexRecipeImgAndIngredients>
-                                <RecipeImages recipe={recipe} displayMode={displayMode}/>
-                                <RecipeIngredients displayMode="all" recipeIngredients={recipe.ingredients}/>
-                            </DivFlexRecipeImgAndIngredients>
-                            <InstructionContainer>
-                                <h3>Instructions</h3>
-                                <p>{recipe.instructions}</p>
-                            </InstructionContainer>
+                                <DivFlexRecipeImgAndIngredients>
+                                    <RecipeImages recipe={recipe} displayMode={displayMode}/>
+                                    <RecipeIngredients displayMode="all" recipeIngredients={recipe.ingredients}/>
+                                </DivFlexRecipeImgAndIngredients>
+                                <InstructionContainer>
+                                    <h3>Instructions</h3>
+                                    <InstructionsParagraph>{recipe.instructions}</InstructionsParagraph>
+                                </InstructionContainer>
+                            </div>
                         </div>
-                    </div>
-                </RecipeDetailWrapper>
-            </div>
-        </RecipeWrapper>
+                    </RecipeDetailWrapper>
+                </div>
+            </RecipeWrapper>
+        </RecipeHeight>
     )
 }
 

@@ -6,14 +6,13 @@ import ProfileSidebar from '../components/ProfileSidebar'
 
 import MyReceipts from "../MyRecipes";
 import ProfileOverview from "../ProfileOverview";
-import CreateRecipe from "../CreateRecipe"
+import CreateRecipe from "../CreateRecipe/CreateRecipe"
 import SavedRecipes from "../SavedRecipes";
 import EditRecipe from "../EditRecipe";
-import Footer from "../../../components/Footer";
 
 
 import {ContentContainer, DivFlex} from "../../../assets/styles/global";
-import {ProfileContainer, ProfileContent} from "./Profile.style";
+import {ProfileContainer, ProfileContent} from "./styles/Profile.style";
 
 
 const Profile = () => {
@@ -40,7 +39,6 @@ const Profile = () => {
                         </Routes>
                     </ProfileContent>
                 </DivFlex>
-                <Footer/>
             </ProfileContainer>
         </ContentContainer>
     )

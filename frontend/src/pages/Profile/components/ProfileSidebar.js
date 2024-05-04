@@ -36,7 +36,7 @@ const ProfileSidebar = () => {
     };
 
     const closeSidebar = () => {
-        if (window.innerWidth <= 720) {
+        if (window.innerWidth <= 770) {
             setIsOpen(false);
             document.body.style.overflow = 'auto';
         }

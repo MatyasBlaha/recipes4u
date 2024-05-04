@@ -12,6 +12,7 @@ export const RecipeContainer = styled.div`
     
     @media screen and (max-width: 540px) {
         min-width: 300px;
+        padding: 20px;
     }
 `
 
@@ -30,12 +31,12 @@ export const RecipeContentContainer = styled.div`
     justify-content: space-between;
     align-items: center;
 
-    @media (max-width: 768px) { // pro menší rozlišení
-        & > div > div > div > p { // specifický selektor pro text instrukcí
-            max-width: 100%; // nastavení maximální šířky
-            overflow: hidden; // skrytí přebytečného textu
-            text-overflow: ellipsis; // zobrazení "..."
-            white-space: nowrap; // zabránění zalomení textu
+    @media (max-width: 768px) { 
+        & > div > div > div > p { 
+            max-width: 100%; 
+            overflow: hidden;
+            text-overflow: ellipsis; 
+            white-space: nowrap; 
         }
     }
     
@@ -72,6 +73,9 @@ margin-bottom: 10px;
 
 //********** RECIPE DETAIL *************//
 
+export const RecipeHeight = styled.div`
+    height: 100%;
+`
 
 export const RecipeDetailWrapper = styled.div`
     padding: 50px;

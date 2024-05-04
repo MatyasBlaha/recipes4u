@@ -85,8 +85,7 @@ const Login = ({ setIsAuthenticated }) => {
 
         axios(confiiguration)
             .then((result) => {
-                console.log(result.data.token)
-                console.log(result.data.role)
+
                 cookies.set('token', result.data.token, {
                     path: '/'
                 });

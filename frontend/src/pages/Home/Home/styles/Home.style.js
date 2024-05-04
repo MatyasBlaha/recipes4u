@@ -55,3 +55,4 @@ export const Header1 = styled.h1`
     font-style: normal;
     font-weight: 400;
 `
+
