@@ -60,7 +60,7 @@ const ResetPassword = () => {
         <div style={{paddingTop: "100px", height: "500px"}}>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Nove heslo:</label>
+                    <label>New password</label>
                     <input
                         type="password"
                         value={password}
@@ -69,7 +69,7 @@ const ResetPassword = () => {
                     />
                 </div>
                 <div>
-                    <label>Potvrzení hesla:</label>
+                    <label>Confirm password</label>
                     <input
                         type="password"
                         value={confirmPassword}
@@ -77,7 +77,7 @@ const ResetPassword = () => {
                         required
                     />
                 </div>
-                <button type="submit">nastavit nove heslo</button>
+                <button type="submit">Set new password</button>
                 {errorMessage && <p>{errorMessage}</p>}
             </form>
 

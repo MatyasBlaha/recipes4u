@@ -85,10 +85,10 @@ const ProfileOverview = () => {
             <div>
                 <span>password</span>
                 <LinkButton onClick={() => setShowEmailInput(true)}>
-                    <span>zmenit heslo</span>
+                    <span>change password</span>
                     <Icon src={iconEdit} alt="edit"/>
                 </LinkButton>
-                {showEmailInput && ( // This conditionally renders the email input field
+                {showEmailInput && (
                     <form onSubmit={forgotPassword}>
                         <input
                             type="email"

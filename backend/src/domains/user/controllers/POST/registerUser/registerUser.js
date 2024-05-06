@@ -52,7 +52,6 @@ exports.registerUser = async (req, res) => {
                     .save()
                     .then((result) => {
                         const userId = result._id;
-                        sendOTPVerificationEmail(result, res, userId)
                     })
 
                     .catch((err) => {

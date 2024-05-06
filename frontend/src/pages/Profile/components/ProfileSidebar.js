@@ -60,7 +60,7 @@ const ProfileSidebar = () => {
             <Sidebar isOpen={isOpen}>
                 <div>
                     <ActiveLinkButton to="/Profile" end onClick={handleLinkClick} style={isActive("/Profile") ? {backgroundColor: '#e0e0e0'} : {}}>Profile</ActiveLinkButton>
-                    <ActiveLinkButton to="/Profile/MyReceipts" onClick={handleLinkClick} className={isActive("/Profile/MyReceipts") ? "active" : ""}>moje recepty</ActiveLinkButton>
+                    <ActiveLinkButton to="/Profile/MyReceipts" onClick={handleLinkClick} className={isActive("/Profile/MyReceipts") ? "active" : ""}>my recipes</ActiveLinkButton>
                     <ActiveLinkButton to="/Profile/CreateRecipe" onClick={handleLinkClick} className={isActive("/Profile/CreateRecipe") ? "active" : ""}>create recipe</ActiveLinkButton>
                     <ActiveLinkButton to="/Profile/SavedRecipes" onClick={handleLinkClick} className={isActive("/Profile/SavedRecipes") ? "active" : ""}>saved recipes</ActiveLinkButton>
                 </div>

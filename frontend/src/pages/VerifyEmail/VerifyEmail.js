@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react';
 import { useNavigate,  useLocation } from 'react-router-dom'
 import axios from "../../services/axiosConfig";
 
-import {DivFlex, LinkButton} from "../../assets/styles/global"
+import {DivFlex, LinkButton, PrimaryLink} from "../../assets/styles/global"
 
 
 const VerifyEmail = () => {
@@ -79,7 +79,7 @@ const VerifyEmail = () => {
                     <input type="hidden" name="userId" value="{{userId}}"/>
                     <input type="submit" value="Verify"/>
                 </form>
-                <LinkButton to="/Login">Login</LinkButton>
+                <PrimaryLink to="/Login">Login</PrimaryLink>
             </DivFlex>
             <p>{registerMessage}</p>
         </div>
