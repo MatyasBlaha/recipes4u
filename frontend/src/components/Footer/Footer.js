@@ -19,7 +19,7 @@ const Footer = () => {
                     <LinkButtonFooter to="">Support</LinkButtonFooter>
                 </LinksContainer>
                 <LinksContainer>
-                    {/* Add your social media icons or links here */}
+
                 </LinksContainer>
             </FooterContent>
             <div>
